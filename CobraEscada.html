@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="Saulo Carvalho,Leandro Cruvinel" content="" />
+  <title>Startic Lab</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+    type="text/css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet" />
+  <link href="css/bertrand.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Startic Lab</a>
+    </div>
+  </nav>
+<!-- JOGO3 jogo -->
+  <div class="container masthead">
+
+    <h3 class="text-uppercase mb-2 text-center">Cobra Escada</h1>
+
+    <div class="d-flex">
+      <button id="startAgainButton" class="btn btn-primary text-center" style="margin:auto;">Jogar agora</button>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4" style="min-height: 200px;">
+      <div
+        style="margin-bottom: 20px; position: relative; border: solid red 1px; background-size: contain; background-repeat: no-repeat;background-image: url('./assets/img/cobra.png'); width: 400px; height:247px;">
+        <div id="token-2"
+          style="position: absolute; left: 170px; opacity: 0.4; border-radius: 50%; top: 140px; height: 60px; width: 60px; background-color: #000;">
+        </div>
+        <div id="token-1"
+          style="position: absolute; left: 50px; opacity: 0.4; border-radius: 50%; top: 140px; height: 60px; width: 60px; background-color: #000;">
+        </div>
+        <div id="token-3"
+          style="position: absolute; left: 290px; opacity: 0.4; border-radius: 50%; top: 140px; height: 60px; width: 60px; background-color: #000;">
+        </div>
+        <div id="token-4"
+          style="position: absolute; left: 50px; opacity: 0.4; border-radius: 50%; top: 40px; height: 60px; width: 60px; background-color: #000;">
+        </div>
+        <div id="token-5"
+          style="position: absolute; left: 170px; opacity: 0.4; border-radius: 50%; top: 40px; height: 60px; width: 60px; background-color: #000;">
+        </div>
+        <div id="token-6"
+          style="position: absolute; left: 290px; opacity: 0.4; border-radius: 50%; top: 40px; height: 60px; width: 60px; background-color: #000;">
+        </div>
+      </div>
+    </div>
+
+    <div class="row flex justify-content-center">
+      <p id="dice-message" style="display: none;" class="text-center"></p>
+    </div>
+
+    <hr class="mt-5 w-50">
+
+    <p style="font-family: 'Nunito', sans-serif;"><b>Instruções:</b>O jogador lança o dado e avança as casas de acordo com o resultado do dado. Vence quando chega ao "pote de ouro.</p>
+
+
+    <hr class="mt-5 w-50">
+
+    <p style="font-family: 'Nunito', sans-serif;"><b>Perguntas sugeridas:</b></p>
+
+    <ul class="mb-5">
+      <li style="font-family: 'Nunito', sans-serif;">Qual a probabilidade do jogador vencer no primeiro lançamento?</li> 
+      <li style="font-family: 'Nunito', sans-serif;">Qual a probabilidade de "cair na casa 1" no primeiro lançamento?</li>
+    </ul>
+  
+    <a href="simulateCobraEscada.html" class="btn btn-primary btn-sm">Simular múltiplos resultados</a>
+  </div>
+
+  <!-- Copyright Section-->
+  <div class="copyright py-4 text-center text-white">
+    <div class="container"><small>Copyright &copy; Startic Lab 2021</small></div>
+  </div>
+
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core theme JS-->
+  <script src="js/scripts.js"></script>
+
+  <!-- Gsap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"
+    integrity="sha512-2fk3Q4NXPYAqIha0glLZ2nluueK43aNoxvijPf53+DgL7UW9mkN+uXc1aEmnZdkkZVvtJZltpRt+JqTWc3TS3Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/ScrollTrigger.min.js"
+    integrity="sha512-jNJOCd1PIjJoUa1XTDKaPdBLNUe4OJTrltKG+70O5ghYZ943nTRGIzjObwC2JtSm1fG7T06GbUApR2eirIU/jA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    const token2Action = gsap.timeline({ paused: true, reversed: true });
+    const token1Action = gsap.timeline({ paused: true, reversed: true });
+    const token3Action = gsap.timeline({ paused: true, reversed: true });
+    const token4Action = gsap.timeline({ paused: true, reversed: true });
+    const token5Action = gsap.timeline({ paused: true, reversed: true });
+    const token6Action = gsap.timeline({ paused: true, reversed: true });
+
+
+    token2Action
+      .from("#token-2", {
+        duration: 1,
+        opacity: 0,
+        delay: 0.5,
+        ease: "power3.out",
+      })
+      .to("#token-2", {
+        duration: 2,
+        x: 120,
+        y: -100,
+        ease: "power3.out",
+      }).
+      to("#token-2", {
+        opacity: 0
+      });;
+
+    token5Action
+      .from("#token-5", {
+        duration: 1,
+        opacity: 0,
+        delay: 0.5,
+        ease: "power3.out",
+      })
+      .to("#token-5", {
+        duration: 4,
+        x: -120,
+        y: +100,
+        ease: "power3.out",
+      })
+      .to("#token-5", {
+        opacity: 0
+      });
+
+    token4Action
+      .from("#token-4", {
+        duration: 1,
+        opacity: 0,
+        delay: 0.5,
+        ease: "power3.out",
+      })
+      .to("#token-4", {
+        duration: 2,
+        x: 0,
+        y: +100,
+        ease: "power3.out",
+      })
+      .to("#token-4", {
+        opacity: 0,        
+      });
+
+
+    token1Action
+      .from("#token-1", {
+        duration: 1,
+        opacity: 0,
+        delay: 0.5,
+        ease: "power3.out",
+      })
+      .to("#token-1", {
+        duration: 2,
+      })
+      .to("#token-1", {
+        opacity: 0,        
+      });
+
+    token3Action
+      .from("#token-3", {
+        duration: 1,
+        opacity: 0,
+        delay: 0.5,
+        ease: "power3.out",
+      })
+      .to("#token-3", {
+        duration: 2,
+      })
+      .to("#token-3", {
+        opacity: 0,        
+      });
+
+    token6Action
+      .from("#token-6", {
+        duration: 1,
+        opacity: 0,
+        delay: 0.5,
+        ease: "power3.out",
+      })
+      .to("#token-6", {
+        duration: 2,
+      })
+      .to("#token-6", {
+        opacity: 0,        
+      }, '=-0.8');
+
+    const actions = [token1Action, token2Action, token3Action, token4Action, token5Action, token6Action]
+
+    document.getElementById("startAgainButton").addEventListener('click', function () {
+
+      const dice_roll = Math.floor(6 * Math.random())
+      const choosed_action = actions[dice_roll]
+
+      if (choosed_action.reversed()) {
+        choosed_action.play();
+      } else {
+        choosed_action.restart();
+        choosed_action.pause();
+        choosed_action.play();
+      }
+
+      document.getElementById('dice-message').innerHTML = `Você tirou ${dice_roll+1} no dado!`;
+      document.getElementById('dice-message').style.display = "block";
+    });
+  </script>
+</body>
+
+</html>
